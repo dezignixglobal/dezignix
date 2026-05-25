@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dezignix Global | Premium Futuristic Creative Agency</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-deep: #030308;
+            --bg-surface: rgba(10, 11, 22, 0.45);
+            --bg-surface-solid: #090a12;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --neon-purple: #d946ef;
+            --neon-blue: #3b82f6;
+            --glow-purple: rgba(217, 69, 239, 0.4);
+            --glow-blue: rgba(59, 130, 246, 0.4);
+            --gradient-cyber: linear-gradient(135deg, #d946ef 0%, #3b82f6 100%);
+            --border-neon: rgba(255, 255, 255, 0.05);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient 3D Neon Lighting Overlays */
+        .ambient-glow-1 {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            top: 50%;
+            left: -20%;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(3, 3, 8, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px var(--glow-purple));
+        }
+
+        .logo-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .logo-title span {
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* Multilingual Controls */
+        .lang-widget {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-neon);
+            padding: 3px;
+            border-radius: 10px;
+            gap: 2px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text-main);
+        }
+
+        .social-trigger-group a {
+            color: var(--text-muted);
+            margin-left: 18px;
+            font-size: 1.15rem;
+            transition: var(--transition-smooth);
+            display: inline-block;
+        }
+
+        .social-trigger-group a:hover {
+            color: var(--neon-purple);
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 8px var(--neon-purple));
+        }
+
+        /* Hero Layer */
+        .hero-viewport {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 20px 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(217, 70, 239, 0.06);
+            border: 1px solid rgba(217, 70, 239, 0.2);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(217, 70, 239, 0.05);
+        }
+
+        .hero-viewport h1 {
+            font-size: 4.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+        }
+
+        .hero-viewport h1 span {
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero-viewport p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .action-button {
+            background: var(--gradient-cyber);
+            color: #fff;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(217, 70, 239, 0.35);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(217, 70, 239, 0.55);
+        }
+
+        /* Premium Floating Device Showcase Mockup */
+        .mockup-showcase-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .display-frame-3d {
+            background: var(--bg-surface-solid);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 15px;
+            border-radius: 28px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 50px rgba(59, 130, 246, 0.1);
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: var(--transition-smooth);
+            width: 100%;
+            max-width: 550px;
+        }
+
+        .display-frame-3d:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .display-frame-3d img {
+            width: 100%;
+            border-radius: 18px;
+            display: block;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Sections General Formatting */
+        section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .component-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .component-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .component-header h2 span {
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .component-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Glassmorphism Presentation Cards */
+        .glass-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-neon);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* About Section Layout */
+        .about-layout {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-layout p {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Custom Adaptive Matrix Services Layout */
+        .services-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 30px;
+        }
+
+        .service-node {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-neon);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 45px;
+            border-radius: 24px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-node::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 60%, rgba(59, 130, 246, 0.03) 100%);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .service-node:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .service-node:hover::before {
+            opacity: 1;
+        }
+
+        .node-icon {
+            font-size: 2.3rem;
+            margin-bottom: 25px;
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .service-node h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.3px;
+        }
+
+        .service-node p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* Portfolio Cards System (Matches Images Exactly) */
+        .portfolio-cluster {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-card-node {
+            background: var(--bg-surface-solid);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-neon);
+            transition: var(--transition-smooth);
+        }
+
+        .portfolio-card-node:hover {
+            transform: translateY(-8px);
+            border-color: rgba(217, 70, 239, 0.25);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 30px rgba(217, 70, 239, 0.05);
+        }
+
+        .portfolio-media-viewport {
+            position: relative;
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            background: #11121d;
+            border-bottom: 1px solid var(--border-neon);
+        }
+
+        .portfolio-media-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .portfolio-card-node:hover .portfolio-media-viewport img {
+            transform: scale(1.04);
+        }
+
+        .portfolio-meta-content {
+            padding: 30px;
+        }
+
+        .portfolio-meta-content h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .portfolio-meta-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Additional Secondary Static Visual Grid Showcase */
+        .panoramic-showcase-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .panoramic-node {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-neon);
+            height: 350px;
+        }
+
+        .panoramic-node img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .panoramic-node:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Contact Block Structure */
+        .contact-workspace {
+            display: grid;
+            grid-template-columns: 1.10fr 0.90fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-channel-details h3 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-channel-details p.lead-text {
+            color: var(--text-muted);
+            margin-bottom: 45px;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .communication-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .communication-icon-shield {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-neon);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.05);
+        }
+
+        .communication-text-block h5 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .communication-text-block a, .communication-text-block p {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .communication-text-block a:hover {
+            color: var(--neon-purple);
+        }
+
+        .side-operational-card {
+            background: var(--bg-surface-solid);
+            border: 1px solid var(--border-neon);
+            padding: 45px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .side-operational-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .side-operational-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Footer Element */
+        footer {
+            background: #020204;
+            padding: 60px 20px 40px 20px;
+            border-top: 1px solid var(--border-neon);
+            text-align: center;
+        }
+
+        .footer-social-vault {
+            margin-bottom: 35px;
+        }
+
+        .footer-social-vault a {
+            color: var(--text-muted);
+            font-size: 1.7rem;
+            margin: 0 15px;
+            transition: var(--transition-smooth);
+            display: inline-block;
+        }
+
+        .footer-social-vault a:hover {
+            color: var(--neon-blue);
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Multilingual Content Switching Framework Classes */
+        [data-content-lang] {
+            display: none;
+        }
+        
+        body.lang-en [data-content-lang="en"] { display: block !important; }
+        body.lang-en span[data-content-lang="en"] { display: inline !important; }
+        
+        body.lang-fr [data-content-lang="fr"] { display: block !important; }
+        body.lang-fr span[data-content-lang="fr"] { display: inline !important; }
+        
+        body.lang-ar [data-content-lang="ar"] { display: block !important; }
+        body.lang-ar span[data-content-lang="ar"] { display: inline !important; }
+        body.lang-ar { direction: rtl; text-align: right; }
+        body.lang-ar .nav-container, 
+        body.lang-ar .hero-grid,
+        body.lang-ar .contact-workspace { direction: rtl; }
+        body.lang-ar .communication-row { gap: 20px; }
+        body.lang-ar .component-header, body.lang-ar .about-layout { text-align: center; }
+
+        /* Responsive Grid Adjustments */
+        @media (max-width: 1024px) {
+            .nav-menu, .social-trigger-group { display: none; }
+            .hero-grid, .contact-workspace, .panoramic-showcase-matrix { grid-template-columns: 1fr; }
+            .hero-viewport h1 { font-size: 3.2rem; }
+            .display-frame-3d { transform: none; max-width: 100%; }
+            .display-frame-3d:hover { transform: none; }
+            .about-box { padding: 35px 20px; }
+        }
+    </style>
+</head>
+<body class="lang-en">
+
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-group">
+                <img src="téléchargement (13).png" alt="Dezignix Global Brand Logo" class="logo-icon">
+                <div class="logo-title">DEZIGNIX <span>GLOBAL</span></div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="active" data-content-lang="en">Home</a><a href="#" class="active" data-content-lang="fr">Accueil</a><a href="#" class="active" data-content-lang="ar">الرئيسية</a></li>
+                <li><a href="#about" data-content-lang="en">About Us</a><a href="#about" data-content-lang="fr">À Propos</a><a href="#about" data-content-lang="ar">من نحن</a></li>
+                <li><a href="#services" data-content-lang="en">Services</a><a href="#services" data-content-lang="fr">Services</a><a href="#services" data-content-lang="ar">خدماتنا</a></li>
+                <li><a href="#portfolio" data-content-lang="en">Portfolio</a><a href="#portfolio" data-content-lang="fr">Portfolio</a><a href="#portfolio" data-content-lang="ar">أعمالنا</a></li>
+                <li><a href="#contact" data-content-lang="en">Contact</a><a href="#contact" data-content-lang="fr">Contact</a><a href="#contact" data-content-lang="ar">اتصل بنا</a></li>
+            </ul>
+
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="lang-widget">
+                    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+                    <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+                </div>
+                <div class="social-trigger-group">
+                    <a href="https://www.linkedin.com/in/sabrine-mohammedi-941407218" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/dezignixglobal" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@dezignixglobal1" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/share/1E7R39f2Sk/" target="_blank"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="hero-viewport">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i> 
+                    <span data-content-lang="en">Creative Hub Studio</span>
+                    <span data-content-lang="fr">Studio Créatif Élite</span>
+                    <span data-content-lang="ar">استوديو الإبداع الرقمي</span>
+                </div>
+                
+                <h1 data-content-lang="en">SHAPING VISION INTO <span>DIGITAL REALITY</span></h1>
+                <h1 data-content-lang="fr">FAÇONNER LA VISION EN <span>RÉALITÉ DIGITALE</span></h1>
+                <h1 data-content-lang="ar">نشكّل الرؤية لتصبح <span>واقعاً رقمياً</span></h1>
+                
+                <p data-content-lang="en">Premium global studio building luxury branding assets, high-end interfaces, and high-tier cinematic design solutions.</p>
+                <p data-content-lang="fr">Studio international haut de gamme spécialisé dans l'identité de marque de luxe, les interfaces fluides et le design d'élite.</p>
+                <p data-content-lang="ar">استوديو إبداعي عالمي متخصص في تصميم الهويات البصرية الفاخرة، الواجهات الرقمية المتطورة، والحلول الإبداعية المتقدمة.</p>
+                
+                <a href="#portfolio" class="action-button">
+                    <span data-content-lang="en">Explore Portfolio</span>
+                    <span data-content-lang="fr">Découvrir le Portfolio</span>
+                    <span data-content-lang="ar">تصفح معرض الأعمال</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="mockup-showcase-container">
+                <div class="display-frame-3d">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Dezignix System Screen Interface Mockup">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="about">
+        <div class="component-header">
+            <h2><span data-content-lang="en">Who We Are</span><span data-content-lang="fr">À Propos</span><span data-content-lang="ar">من نحن</span></h2>
+        </div>
+        <div class="about-layout glass-panel">
+            <p data-content-lang="en">At Dezignix Global, we merge advanced corporate strategy, elite creative direction, and seamless design structures to build breathtaking visual systems. We do not just build graphics; we craft deep, immersive cross-platform brand ecosystems that command global market attention from our core base in Algeria.</p>
+            <p data-content-lang="fr">Chez Dezignix Global, nous fusionnons stratégie d'entreprise, direction artistique d'élite et structures technologiques pour créer des écosystèmes de marque immersifs. Basés en Algérie, nous propulsons votre identité visuelle sur la scène internationale.</p>
+            <p data-content-lang="ar">في Dezignix Global، نجمع بين الاستراتيجية المتقدمة والإدارة الإبداعية النخبوية لنحت أنظمة بصرية مذهلة. نحن لا نصمم رسومات مجردة، بل نبتكر أنظمة بيئية بصرية متكاملة للماركات العالمية لتستحوذ على الأسواق المستهدفة انطلاقاً من مقرنا في الجزائر.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="component-header">
+            <h2><span data-content-lang="en">Our Creative Vertical Services</span><span data-content-lang="fr">Nos Domaines d'Expertise</span><span data-content-lang="ar">خدماتنا الإبداعية</span></h2>
+        </div>
+        
+        <div class="services-matrix">
+            <div class="service-node">
+                <i class="fas fa-bezier-curve node-icon"></i>
+                <h3 data-content-lang="en">Branding & Identity</h3><h3 data-content-lang="fr">Branding & Identité</h3><h3 data-content-lang="ar">الهوية البصرية والبراندينج</h3>
+                <p data-content-lang="en">Premium high-fidelity custom logos, structural brandbooks, and corporate asset positioning guidelines.</p>
+                <p data-content-lang="fr">Logos sur mesure haut de gamme, chartes graphiques complexes et positionnement de marque premium.</p>
+                <p data-content-lang="ar">تصميم شعارات فاخرة وفريدة، بناء أدلة الهويات البصرية المتكاملة، وتحديد معايير الأصول المؤسسية.</p>
+            </div>
+
+            <div class="service-node">
+                <i class="fas fa-layer-group node-icon"></i>
+                <h3 data-content-lang="en">Graphic Design</h3><h3 data-content-lang="fr">Design Graphique</h3><h3 data-content-lang="ar">التصميم الجرافيكي</h3>
+                <p data-content-lang="en">High-end marketing components, aesthetic operational stationary layouts, and corporate publications.</p>
+                <p data-content-lang="fr">Supports marketing haut de gamme, papeterie d'entreprise de luxe et publications éditoriales.</p>
+                <p data-content-lang="ar">ابتكار منشورات تسويقية راقية، تصاميم المطبوعات الرسمية الفاخرة، والمواد البصرية الاحترافية.</p>
+            </div>
+
+            <div class="service-node">
+                <i class="fas fa-desktop node-icon"></i>
+                <h3 data-content-lang="en">Web & UI/UX Design</h3><h3 data-content-lang="fr">Design Web & UI/UX</h3><h3 data-content-lang="ar">تصميم المواقع وواجهات المستخدم</h3>
+                <p data-content-lang="en">Immersive platform wireframing, high-fidelity landing screen design, and fully fluid responsive structures.</p>
+                <p data-content-lang="fr">Maquettes de plateformes immersives, design d'interfaces haute fidélité et structures fluides responsives.</p>
+                <p data-content-lang="ar">هندسة تجارب مستخدم مريحة، تصميم واجهات مواقع فائقة الجودة ومتوافقة تماماً مع كافة الشاشات.</p>
+            </div>
+
+            <div class="service-node">
+                <i class="fas fa-film node-icon"></i>
+                <h3 data-content-lang="en">Video Editing</h3><h3 data-content-lang="fr">Montage Vidéo</h3><h3 data-content-lang="ar">مونتاج وتعديل الفيديو</h3>
+                <p data-content-lang="en">Cinematic corporate asset production, motion graphic sequences, and commercial promo construction.</p>
+                <p data-content-lang="fr">Production de contenus vidéo cinématiques, séquences de motion design et spots publicitaires.</p>
+                <p data-content-lang="ar">صناعة مقاطع فيديو سينمائية للمؤسسات، تصميم المؤثرات الحركية (Motion Graphics)، وإنتاج الإعلانات.</p>
+            </div>
+
+            <div class="service-node">
+                <i class="fas fa-sliders node-icon"></i>
+                <h3 data-content-lang="en">Social Media Design</h3><h3 data-content-lang="fr">Design Réseaux Sociaux</h3><h3 data-content-lang="ar">تصاميم شبكات التواصل الاجتماعي</h3>
+                <p data-content-lang="en">High-conversion modern target grids, custom feed architectures, and cohesive commercial campaign kits.</p>
+                <p data-content-lang="fr">Grilles de flux personnalisées à fort impact, bannières haut de gamme et kits de campagnes publicitaires.</p>
+                <p data-content-lang="ar">تنسيق حسابات التواصل بشكل جمالي جذاب، قوالب مخصصة متناسقة، وحزم الحملات الإعلانية المتكاملة.</p>
+            </div>
+
+            <div class="service-node">
+                <i class="fas fa-brain node-icon"></i>
+                <h3 data-content-lang="en">AI Creative Solutions</h3><h3 data-content-lang="fr">Solutions Créatives IA</h3><h3 data-content-lang="ar">الحلول الإبداعية بالذكاء الاصطناعي</h3>
+                <p data-content-lang="en">Advanced smart artwork concepts, automated generation systems, and futuristic synthetic visuals.</p>
+                <p data-content-lang="fr">Génération d'art numérique par IA, concepts futuristes avancés et visuels synthétiques uniques.</p>
+                <p data-content-lang="ar">إنشاء أعمال فنية ذكية متطورة، ابتكار مرئيات مستقبلية توليدية، وتسريع الإنتاج الفني الرقمي.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="component-header">
+            <h2><span data-content-lang="en">Selected Portfolio Case Studies</span><span data-content-lang="fr">Projets Sélectionnés</span><span data-content-lang="ar">معرض الأعمال المتميزة</span></h2>
+        </div>
+
+        <div class="portfolio-cluster">
+            <div class="portfolio-card-node">
+                <div class="portfolio-media-viewport">
+                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80" alt="Aurora Platform Cyber Landscape UI">
+                </div>
+                <div class="portfolio-meta-content">
+                    <h4>Aurora Platform</h4>
+                    <p data-content-lang="en">A high-fidelity immersive web platform UI engineered for complex scalable modern analytics ecosystems.</p>
+                    <p data-content-lang="fr">Une interface web haute fidélité conçue pour des écosystèmes d'analyse complexes et évolutifs.</p>
+                    <p data-content-lang="ar">واجهة مستخدم رقمية فائقة الجودة تم تطويرها للمنصات السحابية والأنظمة التحليلية المتقدمة.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card-node">
+                <div class="portfolio-media-viewport">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=700&q=80" alt="Aether Identity System Premium Mockups">
+                </div>
+                <div class="portfolio-meta-content">
+                    <h4>Aether Brand Identity</h4>
+                    <p data-content-lang="en">Premium corporate packaging identity layout constructed with pristine corporate vector grids and clean typography.</p>
+                    <p data-content-lang="fr">Identité visuelle de marque de luxe épurée, s'appuyant sur des grilles vectorielles précises et strictes.</p>
+                    <p data-content-lang="ar">نظام هوية بصرية فاخر مبني على شبكات هندسية دقيقة وخطوط طباعية متناسقة تبرز عراقة العلامة.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card-node">
+                <div class="portfolio-media-viewport">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="Stationary Luxury Design Production Assets">
+                </div>
+                <div class="portfolio-meta-content">
+                    <h4>Stationary Portfolio</h4>
+                    <p data-content-lang="en">Premium physical and digital custom corporate layout sets optimized to deliver a luxurious client impact.</p>
+                    <p data-content-lang="fr">Gamme complète de papeterie d'entreprise physique et numérique, optimisée pour un impact haut de gamme.</p>
+                    <p data-content-lang="ar">حزمة المطبوعات الرسمية والمراسلات الرقمية والورقية المصممة لترك انطباع فاخر ومستدام لدى العملاء.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panoramic-showcase-matrix">
+            <div class="panoramic-node">
+                <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" alt="Abstract Futuristic Corporate Graphic Rendering 1">
+            </div>
+            <div class="panoramic-node">
+                <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=800&q=80" alt="Abstract Futuristic Corporate Graphic Rendering 2">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="component-header">
+            <h2><span data-content-lang="en">Let's Secure Synergy</span><span data-content-lang="fr">Collaborons Ensemble</span><span data-content-lang="ar">لنبدأ العمل معاً</span></h2>
+        </div>
+
+        <div class="contact-workspace">
+            <div class="contact-channel-details">
+                <h3 data-content-lang="en">Build Your Infinite Asset</h3>
+                <h3 data-content-lang="fr">Donnez Vie à Vos Projets</h3>
+                <h3 data-content-lang="ar">ارتقِ بوجودك الرقمي الآن</h3>
+                
+                <p class="lead-text" data-content-lang="en">Ready to elevate your operational assets? Contact our design studio directly through any of our verified communications gateways.</p>
+                <p class="lead-text" data-content-lang="fr">Prêt à propulser vos actifs visuels ? Contactez notre studio directement via nos différents canaux sécurisés.</p>
+                <p class="lead-text" data-content-lang="ar">هل أنت جاهز لتطوير أصولك البصرية؟ تواصل مع استوديو التصميم الخاص بنا مباشرة عبر قنوات الاتصال المعتمدة.</p>
+                
+                <div class="communication-row">
+                    <div class="communication-icon-shield"><i class="fab fa-whatsapp"></i></div>
+                    <div class="communication-text-block">
+                        <h5>WhatsApp / Viber / Mobile</h5>
+                        <p><a href="tel:+213559501766">+213 559 50 17 66</a></p>
+                    </div>
+                </div>
+
+                <div class="communication-row">
+                    <div class="communication-icon-shield"><i class="fas fa-envelope"></i></div>
+                    <div class="communication-text-block">
+                        <h5>Direct Secure Email</h5>
+                        <p><a href="mailto:dezignixcreativity@gmail.com">dezignixcreativity@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="communication-row">
+                    <div class="communication-icon-shield"><i class="fab fa-youtube"></i></div>
+                    <div class="communication-text-block">
+                        <h5>YouTube Channel</h5>
+                        <p><a href="https://www.youtube.com/@dezignixglobal" target="_blank">Dezignix Global Media</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-operational-card">
+                <h4 data-content-lang="en"><i class="fas fa-globe"></i> Global Synchronization</h4>
+                <h4 data-content-lang="fr"><i class="fas fa-globe"></i> Synchronisation Globale</h4>
+                <h4 data-content-lang="ar"><i class="fas fa-globe"></i> مزامنة تشغيلية عالمية</h4>
+                
+                <p data-content-lang="en">Operating globally from Algeria, our architecture group supports brands in every continent. We align with your target timeframes to offer stellar maintenance, instant pipelines, and pristine pixel-perfect visuals.</p>
+                <p data-content-lang="fr">Opérant depuis l'Algérie, notre studio collabore avec des marques du monde entier. Nous nous alignons sur vos fuseaux horaires pour garantir un suivi fluide et des livrables impeccables.</p>
+                <p data-content-lang="ar">نعمل دولياً من قلب الجزائر لنلبي متطلبات الشركات في مختلف القارات. نلتزم بجدولك الزمني ومواقيتك المحلية لضمان تواصل سريع، مرونة تامة، وتسليم أعمال بصرية متكاملة وخالية من الأخطاء.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-social-vault">
+            <a href="https://www.linkedin.com/in/sabrine-mohammedi-941407218" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/dezignixglobal" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@dezignixglobal1" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.facebook.com/share/1E7R39f2Sk/" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+        <p>&copy; 2026 Dezignix Global. Engineered for Premium Cyber-Creative Operations. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function switchLanguage(langCode) {
+            // Apply language state class to body root element
+            document.body.className = 'lang-' + langCode;
+            
+            // Manage UI Button State Highlights
+            const targetButtons = document.querySelectorAll('.lang-btn');
+            targetButtons.forEach(btn => {
+                if(btn.innerText.toLowerCase() === langCode) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
